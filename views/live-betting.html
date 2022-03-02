@@ -3073,12 +3073,12 @@
     const res=document.querySelector('#top-cham');
    
 
-    socket.on('msg2',msg2=>{
+    socket.on('TopChamp',msg2=>{
         
           console.log(msg2)
           res.innerHTML='';
         msg2.forEach(r => {
-            res.innerHTML+='<li style="width: 100%;height: 40px;"> <a href="#" style="padding: 0;width: 100%;height: 100%;"> <div class="sport-cat"> <img style="    height: 100%;"  src="'+r['league']['flag']+'"> <span class="sport-a">'+r['league']['name']+'</span> </div> </a> </li> '
+            res.innerHTML+='<li style="width: 100%;height: 40px;"> <a href="#" style="padding: 0;width: 100%;height: 100%;"> <div class="sport-cat"> <img style="    height: 100%;"  src="'+r['flag']+'"> <span class="sport-a">'+r['name']+'</span> </div> </a> </li> '
               
         });
         
