@@ -21,7 +21,7 @@
                 <nav class="navbar navbar-default navbar-mobile bootsnav on">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-                            <i class="fa fa-bars"></i>
+                            <i class="fa fa-bars fa-2x" style="padding: 0;"></i>
                         </button>
                     </div>
                     <div class="collapse navbar-collapse" id="navbar-menu">
@@ -31,14 +31,9 @@
                         <div class="col-md-8 navbar-expand-lg">
                             <ul class="nav navbar-nav " data-in="fadeInDown" data-out="fadeOutUp" style="height: 54px;">
                                 <li style="width: 15%;"></li>
-                                <li><a href="index.html" data-hover="Home">Home <span data-hover="Home"></span></a></li>
+                                <li><a href="prematch.html" data-hover="Home">Sport Betting <span data-hover="Home"></span></a></li>
                                 <!-- <li><a href="#" data-hover="About">About <span data-hover="About"></span></a></li> -->
                                 <li class="active"><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="Shortcodes">Live Betting <span data-hover="Shortcodes"></span></a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="Pages">Pages <span data-hover="Pages"></span></a>
-
-                                </li>
-                                <li><a href="#" data-hover="Portfolio">Portfolio <span data-hover="Portfolio"></span></a></li>
                                 <li class="dropdown megamenu-fw">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="Megamenu">Megamenu <span data-hover="Megamenu"></span></a>
 
@@ -101,7 +96,7 @@
                                         <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                             <div class="panel-body" style="padding: 0;">
                                                 <ul class="nav" id="top-cham">
-                                                  <!--   <li>
+                                                    <!--   <li>
                                                         <a href="#">
                                                             <div class="sport-cat"><img src="images/flags/es.svg">
                                                                 <span class="sport-a">LaLiga</span>
@@ -137,7 +132,7 @@
                                                         </a>
                                                     </li>-->
                                                 </ul>
-                                            </div> 
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="panel panel-default">
@@ -435,7 +430,7 @@
                                         <div class="panel-heading" role="tab" id="headingOneq">
                                             <h4 class="panel-title">
                                                 <a role="button" data-toggle="collapse" data-parent="#accordionMenu" href="#collapseOneq" aria-expanded="true" aria-controls="collapseOne">
-                                                    Top Event <span style="background-color: red;" class="badge">live</span>
+                                                    Top Event <span class="badge span-d">live</span>
                                                 </a>
                                             </h4>
                                         </div>
@@ -648,7 +643,7 @@
                                         <div class="panel-heading" role="tab" id="headingTwoq">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionMenu" href="#collapseTwoq" aria-expanded="false" aria-controls="collapseTwo">
-                                                    Sports <span style="background-color: red;" class="badge">live</span>
+                                                    Sports <span class="badge span-d">live</span>
                                                 </a>
                                             </h4>
                                         </div>
@@ -751,7 +746,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading span-y" role="tab" id="headingOneq" style=" text-align: left;">
                             <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordionMenu" href="#upcoming_event" aria-expanded="true" aria-controls="collapseOne">
+                                <a style="color: var(--bg);" role="button" data-toggle="collapse" data-parent="#accordionMenu" href="#upcoming_event" aria-expanded="true" aria-controls="collapseOne">
                                     SPORT BETTING <span  class="badge span-d">live</span>
                                 </a>
                             </h4>
@@ -2789,7 +2784,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading span-y" role="tab" id="headingTwoq" style="text-align: left;">
                             <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordionMenu" href="#sport_betting" aria-expanded="false" aria-controls="collapseTwo">
+                                <a style="color: var(--bg);" role="button" data-toggle="collapse" data-parent="#accordionMenu" href="#sport_betting" aria-expanded="false" aria-controls="collapseTwo">
                                     UPCOMING EVENT
                                 </a>
                             </h4>
@@ -3057,42 +3052,40 @@
 
 
 
-<script>
-    const socket =window.io();
+    <script>
+        const socket = window.io();
 
-    // // send data to server
-    // socket.emit('message',{message:'hello'});
-   
-    // // reseive date from serever
+        // // send data to server
+        // socket.emit('message',{message:'hello'});
 
-    // socket.on('test',data=>{
-    //     console.log(data);
-    // })
-    // const msgform=document.querySelector('#name-form');
-    // const msginput=document.querySelector('#name-input');
-    const res=document.querySelector('#top-cham');
-   
+        // // reseive date from serever
 
-    socket.on('msg2',msg2=>{
-        
-          console.log(msg2)
-          res.innerHTML='';
-        msg2.forEach(r => {
-            res.innerHTML+='<li style="width: 100%;height: 40px;"> <a href="#" style="padding: 0;width: 100%;height: 100%;"> <div class="sport-cat"> <img style="    height: 100%;"  src="'+r['league']['flag']+'"> <span class="sport-a">'+r['league']['name']+'</span> </div> </a> </li> '
-              
-        });
-        
-        
-    //    res.innerHTML='<h4>the server say : </h4>'
-    //    res.innerHTML+=msg2;
-       
-    })
-     
+        // socket.on('test',data=>{
+        //     console.log(data);
+        // })
+        // const msgform=document.querySelector('#name-form');
+        // const msginput=document.querySelector('#name-input');
+        const res = document.querySelector('#top-cham');
 
-</script>
 
- 
- 
+        socket.on('msg2', msg2 => {
+
+            console.log(msg2)
+            res.innerHTML = '';
+            msg2.forEach(r => {
+                res.innerHTML += '<li style="width: 100%;height: 40px;"> <a href="#" style="padding: 0;width: 100%;height: 100%;"> <div class="sport-cat"> <img style="    height: 100%;"  src="' + r['league']['flag'] + '"> <span class="sport-a">' + r['league']['name'] + '</span> </div> </a> </li> '
+
+            });
+
+
+            //    res.innerHTML='<h4>the server say : </h4>'
+            //    res.innerHTML+=msg2;
+
+        })
+    </script>
+
+
+
 
 
 
