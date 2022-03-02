@@ -1,7 +1,6 @@
 {
   "name": "untitled-folder",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,5 +18,15 @@
     "nodemon": "^2.0.15",
     "socket.io": "^4.4.1",
     "uuid": "^8.3.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thaar-Abo-shah/Sport_Betting.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Thaar-Abo-shah/Sport_Betting/issues"
+  },
+  "homepage": "https://github.com/Thaar-Abo-shah/Sport_Betting#readme",
+  "description": ""
 }
