@@ -3086,29 +3086,19 @@
 
 
 
-<<<<<<< HEAD
-=======
-    socket.on('TopChamp',msg2=>{
-        
-          console.log(msg2)
-          res.innerHTML='';
-        msg2.forEach(r => {
-            res.innerHTML+='<li style="width: 100%;height: 40px;"> <a href="#" style="padding: 0;width: 100%;height: 100%;"> <div class="sport-cat"> <img style="    height: 100%;"  src="'+r['flag']+'"> <span class="sport-a">'+r['name']+'</span> </div> </a> </li> '
-              
-        });
-        
-        
-    //    res.innerHTML='<h4>the server say : </h4>'
-    //    res.innerHTML+=msg2;
-       
-    })
-     
+    socket.on('TopChamp',msg2=>{ console.log(msg2) res.innerHTML=''; msg2.forEach(r => { res.innerHTML+='
+    <li style="width: 100%;height: 40px;">
+        <a href="#" style="padding: 0;width: 100%;height: 100%;">
+            <div class="sport-cat"> <img style="    height: 100%;" src="'+r['flag']+'"> <span class="sport-a">'+r['name']+'</span> </div>
+        </a>
+    </li> ' }); // res.innerHTML='
+    <h4>the server say : </h4>' // res.innerHTML+=msg2; })
 
-</script>
 
- 
- 
->>>>>>> c55a3c46339286eebc01289930c075e7c343bc41
+    </script>
+
+
+
 
 
 
