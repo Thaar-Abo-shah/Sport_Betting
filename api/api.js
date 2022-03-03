@@ -2,6 +2,10 @@ const axios = require('axios')
 
 
 const apiKey='b0806ec4d2d6f0902ab99a747e9a8b90';
+oldDate=new Date()
+day1=new Date(oldDate.getFullYear(),oldDate.getMonth(),oldDate.getDate()+2);
+
+const date = d => d.toISOString().slice(0, 10);
 
 const getStatus=async()=>{
     var config = {
@@ -57,7 +61,7 @@ const getFixture=async()=>{
   var options = {
     method: 'GET',
     url: 'https://v3.football.api-sports.io/fixtures',
-    params: {date:'2022-03-04'},
+    params: {date:date(day1)},
     headers: {
       'x-rapidapi-host': 'v3.football.api-sports.io',
       'x-rapidapi-key': apiKey
@@ -65,41 +69,43 @@ const getFixture=async()=>{
   };
   
   axios.request(options).then(function (response) {
-   // console.log(JSON.stringify(response.data))
-    global.Odds=(response.data['response'])
-    return response.data['response'];
+   //console.log(JSON.stringify(response.data))
+    global.Odds=getTopChamp(response.data)
+    console.log(Odds)
+    return global.Odds;
    })
    .catch(function (error) {
      return error;
    });
 
-  //  var options = {
-  //   method: 'GET',
-  //   url: 'https://v3.football.api-sports.io/odds',
-  //   params: {date:'2022-03-03'},
-  //   headers: {
-  //     'x-rapidapi-host': 'v3.football.api-sports.io',
-  //     'x-rapidapi-key': apiKey
-  //   }
-  // };
-  
-  // axios.request(options).then(function (response) {
-    
-  //   global.Odds +=(response.data['response'])
-  //   console.log((global.Odds))
-  //   return response.data;
-  //  })
-  //  .catch(function (error) {
-  //    return error;
-  //  });
-
-   
- 
-
-
 }  
 
+const removeDuplicates = (array, key) => {
+  return array.reduce((arr, item) => {
+    const removed = arr.filter(i => i[key] !== item[key]);
+    return [...removed, item];
+  }, []);
+};
+const getTopChamp=(data)=>{
+  var top=[];
+  data['response'].forEach(d => {
+  
 
+    if(d['fixture']['status']['long']=='Not Started'){
+       
+        if(d['league']['flag']=='null'){
+          top.push({id:d['league']['id'],flag:d['league']['logo'],name:d['league']['name']})
+        } else {
+          top.push({id:d['league']['id'],flag:d['league']['flag'],name:d['league']['name']})
+        }
+     
+    }
+    
+  });
+
+  const unique =removeDuplicates(top, 'id')
+  return unique;
+}
 
 // /// 1 per day
 // const getSeasons=async()=>{

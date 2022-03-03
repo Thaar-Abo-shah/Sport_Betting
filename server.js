@@ -36,35 +36,59 @@ app.get('/1008015.html', (req, res) => {
 })
 
 
-
+global.Odds = [];
 
 
 api.getFixture();
 
 
 
-io.on('connection', socket => {
-    //    socket.on('message',data=>{
-    //        console.log(data)
-    //    })
-    //    socket.emit('test',{name:'test'})
+<<
+<< << < HEAD
+io.on('connection', socket => { ===
+            === =
 
-    socket.emit('msg2', global.Odds)
+            io.on('connection', socket => { >>>
+                >>> > c55a3c46339286eebc01289930c075e7c343bc41
+                //    socket.on('message',data=>{
+                //        console.log(data)
+                //    })
+                //    socket.emit('test',{name:'test'})
+                    <<
+                    << << < HEAD
 
-    // console.log(resp.data)
-    //   socket.on('client-message',(msg)=>{
+                socket.emit('msg2', global.Odds)
 
-    //       msg2= a;
+                // console.log(resp.data)
+                //   socket.on('client-message',(msg)=>{
 
-    //       socket.emit('server-message',(msg2))
+                //       msg2= a;
 
-    //   })
+                //       socket.emit('server-message',(msg2))
 
-    // v1.get('/',api.getData)
+                //   })
+
+                ===
+                === =
+
+                socket.emit('TopChamp', global.Odds)
+
+                // console.log(resp.data)
+                //   socket.on('client-message',(msg)=>{
+
+                //       msg2= a;
+
+                //       socket.emit('server-message',(msg2))
+
+                //   })
+
+                >>>
+                >>> > c55a3c46339286eebc01289930c075e7c343bc41
+                // v1.get('/',api.getData)
 
 
-})
+            })
 
 
 
-server.listen(8080)
+            server.listen(8080)
