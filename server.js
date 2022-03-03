@@ -43,52 +43,29 @@ api.getFixture();
 
 
 
-<<
-<< << < HEAD
-io.on('connection', socket => { ===
-            === =
 
-            io.on('connection', socket => { >>>
-                >>> > c55a3c46339286eebc01289930c075e7c343bc41
-                //    socket.on('message',data=>{
-                //        console.log(data)
-                //    })
-                //    socket.emit('test',{name:'test'})
-                    <<
-                    << << < HEAD
+io.on('connection', socket => {
+    //    socket.on('message',data=>{
+    //        console.log(data)
+    //    })
+    //    socket.emit('test',{name:'test'})
 
-                socket.emit('msg2', global.Odds)
+    socket.emit('TopChamp', global.Odds)
 
-                // console.log(resp.data)
-                //   socket.on('client-message',(msg)=>{
+    // console.log(resp.data)
+    //   socket.on('client-message',(msg)=>{
 
-                //       msg2= a;
+    //       msg2= a;
 
-                //       socket.emit('server-message',(msg2))
+    //       socket.emit('server-message',(msg2))
 
-                //   })
+    //   })
 
-                ===
-                === =
-
-                socket.emit('TopChamp', global.Odds)
-
-                // console.log(resp.data)
-                //   socket.on('client-message',(msg)=>{
-
-                //       msg2= a;
-
-                //       socket.emit('server-message',(msg2))
-
-                //   })
-
-                >>>
-                >>> > c55a3c46339286eebc01289930c075e7c343bc41
-                // v1.get('/',api.getData)
+    // v1.get('/',api.getData)
 
 
-            })
+})
 
 
 
-            server.listen(8080)
+server.listen(8080)
