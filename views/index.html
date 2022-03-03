@@ -3070,32 +3070,15 @@
 
     <script>
         const socket = window.io();
-
-        // // send data to server
-        // socket.emit('message',{message:'hello'});
-
-        // // reseive date from serever
-
-        // socket.on('test',data=>{
-        //     console.log(data);
-        // })
-        // const msgform=document.querySelector('#name-form');
-        // const msginput=document.querySelector('#name-input');
         const res = document.querySelector('#top-cham');
 
 
-        socket.on('msg2', msg2 => {
-
-            console.log(msg2)
+        socket.on('TopChamp', Odds => {
             res.innerHTML = '';
-            msg2.forEach(r => {
-                res.innerHTML += '<li style="width: 100%;height: 40px;"> <a href="#" style="padding: 0;width: 100%;height: 100%;"> <div class="sport-cat"> <img style="    height: 100%;"  src="' + r['league']['flag'] + '"> <span class="sport-a">' + r['league']['name'] + '</span> </div> </a> </li> '
+            Odds.forEach(r => {
+                res.innerHTML += '<li style="width: 100%;height: 40px;"> <a href="#" style="padding: 0;width: 100%;height: 100%;"> <div class="sport-cat"> <img style="    height: 100%;"  src="' + r['flag'] + '"> <span class="sport-a">' + r['name'] + '</span> </div> </a> </li> '
 
             });
-
-
-            //    res.innerHTML='<h4>the server say : </h4>'
-            //    res.innerHTML+=msg2;
 
         })
     </script>

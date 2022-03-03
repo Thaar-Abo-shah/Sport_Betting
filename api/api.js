@@ -71,7 +71,6 @@ const getFixture = async() => {
     axios.request(options).then(function(response) {
             //console.log(JSON.stringify(response.data))
             global.Odds = getTopChamp(response.data)
-            console.log(Odds)
             return global.Odds;
         })
         .catch(function(error) {
