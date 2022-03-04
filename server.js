@@ -26,10 +26,13 @@ app.get('/live-betting.html', (req, res) => {
 });
 
 
-global.Odds=[];
+global.Odds1=[];
+global.Odds2=[];
 
 
-api.getFixture();
+api.getOdds1();
+api.getOdds2();
+api.getFixtures();
 
 
 
@@ -40,11 +43,13 @@ io.on('connection',socket =>{
     //    })
     //    socket.emit('test',{name:'test'})
           
-    socket.emit('TopChamp',global.Odds)
+    socket.emit('TopChamp',global.Odds1)
+    socket.emit('TopChamp2',global.Odds2)
     
         // console.log(resp.data)
         //   socket.on('client-message',(msg)=>{
-             
+
+        
         //       msg2= a;
             
         //       socket.emit('server-message',(msg2))

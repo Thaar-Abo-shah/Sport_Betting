@@ -3,7 +3,8 @@ const axios = require('axios')
 
 const apiKey='b0806ec4d2d6f0902ab99a747e9a8b90';
 oldDate=new Date()
-day1=new Date(oldDate.getFullYear(),oldDate.getMonth(),oldDate.getDate()+2);
+day1=new Date(oldDate.getFullYear(),oldDate.getMonth(),oldDate.getDate());
+day2=new Date(oldDate.getFullYear(),oldDate.getMonth(),oldDate.getDate()+1);
 
 const date = d => d.toISOString().slice(0, 10);
 
@@ -54,14 +55,14 @@ const getLive=async()=>{
 }  
 
 /// 1 per day
-const getFixture=async()=>{
+const getOdds1=async()=>{
 
 
   
   var options = {
     method: 'GET',
-    url: 'https://v3.football.api-sports.io/fixtures',
-    params: {date:date(day1)},
+    url: 'https://v3.football.api-sports.io/odds',
+    params: {date:date(day2),page:1},
     headers: {
       'x-rapidapi-host': 'v3.football.api-sports.io',
       'x-rapidapi-key': apiKey
@@ -69,15 +70,76 @@ const getFixture=async()=>{
   };
   
   axios.request(options).then(function (response) {
-   //console.log(JSON.stringify(response.data))
-    global.Odds=getTopChamp(response.data)
-    console.log(Odds)
-    return global.Odds;
+  console.log((response.data['paging']['current']))
+  
+    global.Odds1=getTopChamp(response.data)
+    //console.log(Odds)
+    return global.Odds1;
    })
    .catch(function (error) {
+     console.log(error)
      return error;
    });
+ 
 
+   
+    
+
+}  
+
+
+const getOdds2=async()=>{
+  var options = {
+    method: 'GET',
+    url: 'https://v3.football.api-sports.io/odds',
+    params: {date:date(day2),page:2},
+    headers: {
+      'x-rapidapi-host': 'v3.football.api-sports.io',
+      'x-rapidapi-key': apiKey
+    }
+  };
+  
+  axios.request(options).then(function (response) {
+  console.log((response.data['paging']['current']))
+  
+    global.Odds2=getTopChamp(response.data)
+    //console.log(Odds)
+    return global.Odds2;
+   })
+   .catch(function (error) {
+     console.log(error)
+     return error;
+   });
+}  
+
+const getFixtures=async()=>{
+  var options = {
+    method: 'GET',
+    url: 'https://v3.football.api-sports.io/fixtures',
+    params: {date:date(day2)},
+    headers: {
+      'x-rapidapi-host': 'v3.football.api-sports.io',
+      'x-rapidapi-key': apiKey
+    }
+  };
+  
+  axios.request(options).then(function (response) {
+  // console.log((response.data['paging']['current']))
+  
+    global.fextures=getTopChamp(response.data)
+    //console.log(Odds)
+    response.data['response'].forEach(r=>{
+      if(r['fixture']['id']==751964)
+      {
+        console.log(JSON.stringify(r['teams']))
+      }
+    })
+    return global.fextures;
+   })
+   .catch(function (error) {
+     console.log(error)
+     return error;
+   });
 }  
 
 const removeDuplicates = (array, key) => {
@@ -86,12 +148,15 @@ const removeDuplicates = (array, key) => {
     return [...removed, item];
   }, []);
 };
+
 const getTopChamp=(data)=>{
   var top=[];
   data['response'].forEach(d => {
-  
-
-    if(d['fixture']['status']['long']=='Not Started'){
+   console.log(d['league']['id'])
+    // if(d['league']['id']==747){
+    //   console.log(JSON.stringify(d))
+    // }
+    //if(d['fixture']['status']['long']=='Not Started'){
        
         if(d['league']['flag']=='null'){
           top.push({id:d['league']['id'],flag:d['league']['logo'],name:d['league']['name']})
@@ -99,7 +164,7 @@ const getTopChamp=(data)=>{
           top.push({id:d['league']['id'],flag:d['league']['flag'],name:d['league']['name']})
         }
      
-    }
+   // }
     
   });
 
@@ -188,35 +253,28 @@ const getMap=async()=>{
  module.exports={
     getStatus, 
     getLive,
-    getFixture,
-   // getSeasons,
+    getOdds1,
+    getOdds2,
+
+    getFixtures,
     getMap
     // getLeagues
 } 
 
 
 
-
-
-// const axios = require('axios')
-// const { json } = require('body-parser')
-
+//  const apiKey= 'e52568ac45ac1c95f5dc65f91bfb3232'
  
 
-// // An api key is emailed to you when you sign up to a plan
-// // Get a free API key at https://api.the-odds-api.com/
-// // const apiKey= 'a036736e3602c563c94f577f4d5feb5b'
- 
+// const sportKey = 'basketball_nba' // use the sport_key from the /sports endpoint below, or use 'upcoming' to see the next 8 games across all sports
 
-// // const sportKey = 'upcoming' // use the sport_key from the /sports endpoint below, or use 'upcoming' to see the next 8 games across all sports
+// const regions = 'eu,us,uk,au' // uk | us | eu | au. Multiple can be specified if comma delimited
 
-// // const regions = 'eu,us,uk,au' // uk | us | eu | au. Multiple can be specified if comma delimited
+// const markets = 'spreads,h2h,totals' // h2h | spreads | totals. Multiple can be specified if comma delimited
 
-// // const markets = 'spreads,h2h,totals' // h2h | spreads | totals. Multiple can be specified if comma delimited
+// const oddsFormat = 'decimal' // decimal | american
 
-// // const oddsFormat = 'american' // decimal | american
-
-// // const dateFormat = 'iso' // iso | unix
+// const dateFormat = 'iso' // iso | unix
  
  
  
@@ -237,46 +295,23 @@ const getMap=async()=>{
 //             dateFormat,
 //         },
         
-//     })
-
-//     console.log('Remaining requests',response.headers['x-requests-remaining'])
+//     }).then(response => {
+//       console.log('Remaining requests',response.headers['x-requests-remaining'])
 //     console.log('Used requests',response.headers['x-requests-used'])
-//     // console.log(response.data[0]['id'])
-//      return response.data
-        
+//     console.log(JSON.stringify(response.data))
+//               return response.data
+//           })
+//           .catch(error => {
+//               console.log('Error status', error.response.status)
+//               console.log(error.response.data)
+//               return error.response.status
+//           })
+ 
 
 // }  
 
 
 
-
-
-
-// const getSports=async()=>{
-//     //  let data={test:'test'}
-//     //  console.log(data)
-//     const response =await axios.get('https://api.the-odds-api.com/v4/sports', {
-//         params: {
-//             apiKey
-//         }
-//     })
-//     .then(response => {
-//         return response.data
-//     })
-//     .catch(error => {
-//         console.log('Error status', error.response.status)
-//         console.log(error.response.data)
-//         return error.response.status
-//     })
- 
-        
-
-// }  
-
-
-
-
-
- 
-    
- 
+//  module.exports={
+//   getData
+// } 
