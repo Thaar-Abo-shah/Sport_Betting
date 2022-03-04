@@ -3055,6 +3055,7 @@
 
 
 
+<<<<<<< HEAD
 
     <script>
         const socket = window.io();
@@ -3073,6 +3074,33 @@
 
 
 
+=======
+    socket.on('TopChamp',msg2=>{
+        
+          console.log(msg2)
+          res.innerHTML='';
+        msg2.forEach(r => {
+            res.innerHTML+='<li style="width: 100%;height: 40px;"> <a href="#" style="padding: 0;width: 100%;height: 100%;"> <div class="sport-cat"> <img style="    height: 100%;"  src="'+r['flag']+'"> <span class="sport-a">'+r['name']+'</span> </div> </a> </li> '
+              
+        });
+             
+    })
+     
+    socket.on('TopChamp2',msg2=>{
+        
+        console.log(msg2)
+      msg2.forEach(r => {
+          res.innerHTML+='<li style="width: 100%;height: 40px;"> <a href="#" style="padding: 0;width: 100%;height: 100%;"> <div class="sport-cat"> <img style="    height: 100%;"  src="'+r['flag']+'"> <span class="sport-a">'+r['name']+'</span> </div> </a> </li> '
+            
+      });
+           
+  })
+
+</script>
+
+ 
+ 
+>>>>>>> b127eea2e4142b35ed2c36599fc9f7bde7d7fd79
 
 
 

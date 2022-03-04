@@ -1,9 +1,18 @@
 const axios = require('axios')
 
 
+<<<<<<< HEAD
 const apiKey = 'b0806ec4d2d6f0902ab99a747e9a8b90';
 oldDate = new Date()
 day1 = new Date(oldDate.getFullYear(), oldDate.getMonth(), oldDate.getDate() + 2);
+=======
+const apiKey='b0806ec4d2d6f0902ab99a747e9a8b90';
+oldDate=new Date()
+day1=new Date(oldDate.getFullYear(),oldDate.getMonth(),oldDate.getDate());
+day2=new Date(oldDate.getFullYear(),oldDate.getMonth(),oldDate.getDate()+1);
+
+const date = d => d.toISOString().slice(0, 10);
+>>>>>>> b127eea2e4142b35ed2c36599fc9f7bde7d7fd79
 
 const date = d => d.toISOString().slice(0, 10);
 
@@ -54,6 +63,7 @@ const getLive = async() => {
 }
 
 /// 1 per day
+<<<<<<< HEAD
 const getFixture = async() => {
 
 
@@ -88,7 +98,124 @@ const removeDuplicates = (array, key) => {
 const getTopChamp = (data) => {
     var top = [];
     data['response'].forEach(d => {
+=======
+const getOdds1=async()=>{
 
+
+  
+  var options = {
+    method: 'GET',
+    url: 'https://v3.football.api-sports.io/odds',
+    params: {date:date(day2),page:1},
+    headers: {
+      'x-rapidapi-host': 'v3.football.api-sports.io',
+      'x-rapidapi-key': apiKey
+    }
+  };
+  
+  axios.request(options).then(function (response) {
+  console.log((response.data['paging']['current']))
+  
+    global.Odds1=getTopChamp(response.data)
+    //console.log(Odds)
+    return global.Odds1;
+   })
+   .catch(function (error) {
+     console.log(error)
+     return error;
+   });
+ 
+
+   
+    
+
+}  
+
+
+const getOdds2=async()=>{
+  var options = {
+    method: 'GET',
+    url: 'https://v3.football.api-sports.io/odds',
+    params: {date:date(day2),page:2},
+    headers: {
+      'x-rapidapi-host': 'v3.football.api-sports.io',
+      'x-rapidapi-key': apiKey
+    }
+  };
+  
+  axios.request(options).then(function (response) {
+  console.log((response.data['paging']['current']))
+  
+    global.Odds2=getTopChamp(response.data)
+    //console.log(Odds)
+    return global.Odds2;
+   })
+   .catch(function (error) {
+     console.log(error)
+     return error;
+   });
+}  
+
+const getFixtures=async()=>{
+  var options = {
+    method: 'GET',
+    url: 'https://v3.football.api-sports.io/fixtures',
+    params: {date:date(day2)},
+    headers: {
+      'x-rapidapi-host': 'v3.football.api-sports.io',
+      'x-rapidapi-key': apiKey
+    }
+  };
+  
+  axios.request(options).then(function (response) {
+  // console.log((response.data['paging']['current']))
+  
+    global.fextures=getTopChamp(response.data)
+    //console.log(Odds)
+    response.data['response'].forEach(r=>{
+      if(r['fixture']['id']==751964)
+      {
+        console.log(JSON.stringify(r['teams']))
+      }
+    })
+    return global.fextures;
+   })
+   .catch(function (error) {
+     console.log(error)
+     return error;
+   });
+}  
+>>>>>>> b127eea2e4142b35ed2c36599fc9f7bde7d7fd79
+
+const removeDuplicates = (array, key) => {
+  return array.reduce((arr, item) => {
+    const removed = arr.filter(i => i[key] !== item[key]);
+    return [...removed, item];
+  }, []);
+};
+
+const getTopChamp=(data)=>{
+  var top=[];
+  data['response'].forEach(d => {
+   console.log(d['league']['id'])
+    // if(d['league']['id']==747){
+    //   console.log(JSON.stringify(d))
+    // }
+    //if(d['fixture']['status']['long']=='Not Started'){
+       
+        if(d['league']['flag']=='null'){
+          top.push({id:d['league']['id'],flag:d['league']['logo'],name:d['league']['name']})
+        } else {
+          top.push({id:d['league']['id'],flag:d['league']['flag'],name:d['league']['name']})
+        }
+     
+   // }
+    
+  });
+
+  const unique =removeDuplicates(top, 'id')
+  return unique;
+}
 
         if (d['fixture']['status']['long'] == 'Not Started') {
 
@@ -187,14 +314,22 @@ const getMap = async() => {
 module.exports = {
     getStatus,
     getLive,
+<<<<<<< HEAD
     getFixture,
     // getSeasons,
+=======
+    getOdds1,
+    getOdds2,
+
+    getFixtures,
+>>>>>>> b127eea2e4142b35ed2c36599fc9f7bde7d7fd79
     getMap
     // getLeagues
 }
 
 
 
+<<<<<<< HEAD
 
 
 // const axios = require('axios')
@@ -206,16 +341,28 @@ module.exports = {
 // // Get a free API key at https://api.the-odds-api.com/
 // // const apiKey= 'a036736e3602c563c94f577f4d5feb5b'
 
+=======
+//  const apiKey= 'e52568ac45ac1c95f5dc65f91bfb3232'
+ 
+>>>>>>> b127eea2e4142b35ed2c36599fc9f7bde7d7fd79
 
-// // const sportKey = 'upcoming' // use the sport_key from the /sports endpoint below, or use 'upcoming' to see the next 8 games across all sports
+// const sportKey = 'basketball_nba' // use the sport_key from the /sports endpoint below, or use 'upcoming' to see the next 8 games across all sports
 
-// // const regions = 'eu,us,uk,au' // uk | us | eu | au. Multiple can be specified if comma delimited
+// const regions = 'eu,us,uk,au' // uk | us | eu | au. Multiple can be specified if comma delimited
 
-// // const markets = 'spreads,h2h,totals' // h2h | spreads | totals. Multiple can be specified if comma delimited
+// const markets = 'spreads,h2h,totals' // h2h | spreads | totals. Multiple can be specified if comma delimited
 
-// // const oddsFormat = 'american' // decimal | american
+// const oddsFormat = 'decimal' // decimal | american
 
+<<<<<<< HEAD
 // // const dateFormat = 'iso' // iso | unix
+=======
+// const dateFormat = 'iso' // iso | unix
+ 
+ 
+ 
+ 
+>>>>>>> b127eea2e4142b35ed2c36599fc9f7bde7d7fd79
 
 
 
@@ -235,6 +382,7 @@ module.exports = {
 //             oddsFormat,
 //             dateFormat,
 //         },
+<<<<<<< HEAD
 
 //     })
 
@@ -243,10 +391,26 @@ module.exports = {
 //     // console.log(response.data[0]['id'])
 //      return response.data
 
+=======
+        
+//     }).then(response => {
+//       console.log('Remaining requests',response.headers['x-requests-remaining'])
+//     console.log('Used requests',response.headers['x-requests-used'])
+//     console.log(JSON.stringify(response.data))
+//               return response.data
+//           })
+//           .catch(error => {
+//               console.log('Error status', error.response.status)
+//               console.log(error.response.data)
+//               return error.response.status
+//           })
+ 
+>>>>>>> b127eea2e4142b35ed2c36599fc9f7bde7d7fd79
 
 // }  
 
 
+<<<<<<< HEAD
 
 
 
@@ -271,3 +435,9 @@ module.exports = {
 
 
 // }
+=======
+
+//  module.exports={
+//   getData
+// } 
+>>>>>>> b127eea2e4142b35ed2c36599fc9f7bde7d7fd79

@@ -35,11 +35,15 @@ app.get('/1008015.html', (req, res) => {
     return res.render('1008015.html')
 })
 
+global.Odds1=[];
+global.Odds2=[];
 
 global.Odds = [];
 
+api.getOdds1();
+api.getOdds2();
+api.getFixtures();
 
-api.getFixture();
 
 
 
@@ -49,6 +53,7 @@ io.on('connection', socket => {
     //        console.log(data)
     //    })
     //    socket.emit('test',{name:'test'})
+<<<<<<< HEAD
 
     socket.emit('TopChamp', global.Odds)
 
@@ -61,6 +66,22 @@ io.on('connection', socket => {
 
     //   })
 
+=======
+          
+    socket.emit('TopChamp',global.Odds1)
+    socket.emit('TopChamp2',global.Odds2)
+    
+        // console.log(resp.data)
+        //   socket.on('client-message',(msg)=>{
+
+        
+        //       msg2= a;
+            
+        //       socket.emit('server-message',(msg2))
+              
+        //   })
+    
+>>>>>>> b127eea2e4142b35ed2c36599fc9f7bde7d7fd79
     // v1.get('/',api.getData)
 
 
